@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import App from './Pages/App/index';
+import rootReducer from './Redux/Reducers/index';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './Pages/App/Components/font.scss';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const mainStore = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk)),
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+ReactDOM.render(
+  // eslint-disable-next-line react/jsx-filename-extension
+  <Provider store={mainStore}>
+    <App />
+  </Provider>,
+  document.querySelector('#root'),
+);
