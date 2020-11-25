@@ -21,3 +21,15 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+node_modules
+*.log
+.idea
+config/local-*.js
+dist/
+build
+yarn.lock
+src/Config/config.js
+*.env
+.eslintcache
