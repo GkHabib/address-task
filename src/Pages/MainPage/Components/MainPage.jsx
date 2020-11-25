@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Button, Grid, Dialog, DialogTitle, DialogContent, Typography, IconButton, TextField,
 } from '@material-ui/core';
@@ -22,6 +23,8 @@ const MainPage = (props) => {
   const [step, setStep] = useState(steps[0]);
   const resetStep = () => setStep(steps[0]);
   const goToNextStep = () => setStep(steps[1]);
+  const [inputValue, setInputValue] = useState('');
+  const { onRequestNewCodeFromServer } = props;
   const stepDataObject = {
     submitMobileNumber: {
       title: 'تایید شماره موبایل',
@@ -29,6 +32,7 @@ const MainPage = (props) => {
       textFieldHelperText: 'لطفا شماره‌تلفن همراه خود را وارد نمایید',
       buttonLabel: 'درخواست کد',
       onClick: () => {
+        onRequestNewCodeFromServer(inputValue && inputValue.toString());
         goToNextStep();
       },
     },
@@ -107,6 +111,9 @@ const MainPage = (props) => {
                 variant="outlined"
                 helperText={stepDataObject[step].textFieldHelperText}
                 autoFocus
+                value={inputValue}
+                onChange={event => setInputValue(event.target.value)}
+
               />
             </Grid>
             <Grid container xs={12} md={6} style={{ margin: '16px 0' }}>
@@ -127,7 +134,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propType = {
-
+  onRequestNewCodeFromServer: PropTypes.func.isRequired,
 };
 
 

@@ -1,6 +1,4 @@
-import {
-  generateActionTypes,
-} from '../../Actions/Helper/GenerateActionTypes';
+import generateActionTypes from '../../Actions/Helper/GenerateActionTypes';
 
 const loginActionTypes = generateActionTypes('LOGIN');
 const tokenActionTypes = generateActionTypes('ACCESS_TOKEN');

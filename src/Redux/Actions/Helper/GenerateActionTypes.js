@@ -1,4 +1,4 @@
-export const generateActionTypes = name => ({
+const generateActionTypes = name => ({
   request: `${name}_REQUESTED`,
   receive: `${name}_RECEIVED`,
   error: `${name}_FAILURE`,
@@ -12,3 +12,5 @@ export const generateActionTypes = name => ({
   filteredDataReceive: `${name}_FILTERED_RECEIVE`,
   filteredDataError: `${name}_FILTERED_ERROR`,
 });
+
+export default generateActionTypes;
