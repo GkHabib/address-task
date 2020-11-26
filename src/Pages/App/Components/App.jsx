@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import RTL from '../../../Common/Components/RTL/index';
 import History from '../../../Router/History';
+import MainPage from '../../MainPage/index';
 import './font.scss';
 
 
@@ -53,7 +54,7 @@ class App extends React.Component {
             dir={appearance.themingData.direction}
             className={appearance.themingData.direction === 'rtl' ? 'persianFont' : 'englishFont'}
           >
-            OK
+            <MainPage />
           </div>
         </RTL>
       </ThemeProvider>

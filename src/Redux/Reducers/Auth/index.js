@@ -1,6 +1,4 @@
-import {
-  generateActionTypes,
-} from '../../Actions/Helper/GenerateActionTypes';
+import generateActionTypes from '../../Actions/Helper/GenerateActionTypes';
 
 const loginActionTypes = generateActionTypes('LOGIN');
 const tokenActionTypes = generateActionTypes('ACCESS_TOKEN');
@@ -10,10 +8,11 @@ const LOGOUT = 'LOGOUT';
 const initAuthState = {
   isFetching: false,
   isAuthenticated: localStorage.getItem('Authenticated') === 'true',
-  accessToken: localStorage.getItem('jwtAccess'),
+  accessToken: localStorage.getItem('accessToken'),
   refreshToken: localStorage.getItem('jwtRefresh'),
   redirectUrl: '/',
   errorMessage: '',
+  user: {},
 };
 
 const Auth = (state = initAuthState, action) => {
@@ -34,18 +33,16 @@ const Auth = (state = initAuthState, action) => {
         errorMessage: '',
       });
     case loginActionTypes.create:
-      localStorage.setItem('jwtAccess', action.payload.data.access);
-      localStorage.setItem('jwtRefresh', action.payload.data.refresh);
+      localStorage.setItem('accessToken', action.payload.data.access_token);
       localStorage.setItem('Authenticated', 'true');
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        accessToken: action.payload.data.access,
-        refreshToken: action.payload.data.refresh,
+        accessToken: action.payload.data.access_token,
+        user: action.payload.data.address_user,
       });
     case tokenActionTypes.create:
-      localStorage.setItem('jwtAccess', action.payload.data.access);
-      // localStorage.setItem('jwtRefresh', action.payload.refresh);
+      localStorage.setItem('accessToken', action.payload.data.access_token);
       localStorage.setItem('Authenticated', 'true');
       return Object.assign({}, state, {
         isFetching: false,
@@ -66,23 +63,13 @@ const Auth = (state = initAuthState, action) => {
         errorMessage: action.message,
       });
     case LOGOUT:
-      localStorage.removeItem('jwtAccess');
-      localStorage.removeItem('jwtRefresh');
+      localStorage.removeItem('accessToken');
       localStorage.removeItem('Authenticated');
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
         accessToken: '',
         refreshToken: '',
-      });
-    case podLoginActionType:
-      localStorage.setItem('jwtAccess', action.payload);
-      localStorage.setItem('Authenticated', 'true');
-      return Object.assign({}, state, {
-        isFetching: false,
-        isAuthenticated: true,
-        accessToken: action.payload.access.data,
-        refreshToken: action.payload.refresh.data,
       });
     default:
       return state;
