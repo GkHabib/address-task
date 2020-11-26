@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#424242',
     },
-    borderRadius: '1rem',
+    borderRadius: '.8rem',
   },
   closeButton: {
     position: 'absolute',
