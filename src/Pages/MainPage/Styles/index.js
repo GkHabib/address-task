@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   dialogContentContainer: {
     padding: theme.spacing(4, 2),
   },
+  dialogPaperRoot: {
+    borderRadius: '0.8rem'
+  }
 }));
 
 export default useStyles;

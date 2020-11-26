@@ -101,8 +101,12 @@ const MainPage = (props) => {
       <Dialog
         open={isDialogOpen}
         onClose={closeDialog}
-        maxWidth="md"
+        maxWidth="sm"
         fullWidth
+        fullScreen={isMobile}
+        classes={{
+          paper: isMobile ? null : classes.dialogPaperRoot,
+        }}
       >
         <DialogTitle classes={{ root: classes.dialogTitleContainer }}>
           <Typography variant="h6"  className={classes.dialogTitle}>
